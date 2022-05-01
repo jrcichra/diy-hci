@@ -1,2 +1,2 @@
 # dyi-hci
-DYI HCI Solution using Rook + KubeVirt + Rancher GUIs
+DIY HCI Solution using Rook + KubeVirt + Rancher GUIs
