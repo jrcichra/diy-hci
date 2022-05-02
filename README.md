@@ -1,4 +1,4 @@
-# dyi-hci
+# diy-hci
 
 DIY-HCI Solution using Rook + KubeVirt + easy-to-use GUIs. The goal is to have a simple way to build a highly available, horizontally scalable container, storage, and virtualization platform.
 
