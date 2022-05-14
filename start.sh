@@ -3,11 +3,18 @@ set -x
 
 # vagrant up
 echo "Starting the VMs..."
+export VAGRANT_EXPERIMENTAL="disks"
 vagrant up
 echo "VMs started"
 
 echo "Installing k3s..."
-wget https://github.com/alexellis/k3sup/releases/download/0.11.3/k3sup -O k3sup
+if [ "$(uname)" == "Darwin" ]; then
+    # MacOS
+    wget https://github.com/alexellis/k3sup/releases/download/0.11.3/k3sup-darwin -O k3sup
+else
+    # Linux
+    wget https://github.com/alexellis/k3sup/releases/download/0.11.3/k3sup -O k3sup
+fi
 chmod +x k3sup
 ./k3sup install --ip 192.168.55.11 --k3s-extra-args '--no-deploy traefik --no-deploy=local-storage' --user vagrant
 ./k3sup join --ip 192.168.55.12 --user vagrant --server-ip 192.168.55.11

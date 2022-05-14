@@ -12,8 +12,9 @@ Vagrant.configure("2") do |config|
         SHELL
         ip = "192.168.55.#{i+10}"
         config.vm.network :private_network, ip: ip
+        config.vm.disk :disk, name: "rook-osd", size: "20GB"      # for virtualbox
         config.vm.provider :libvirt do |libvirt|
-          libvirt.storage :file, :size => '100G'
+          libvirt.storage :file, :size => '20G'
           libvirt.cpu_mode = 'host-passthrough'
           libvirt.cpus = 4
           libvirt.nested = true
