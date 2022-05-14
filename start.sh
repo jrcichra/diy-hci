@@ -49,9 +49,13 @@ kubectl apply -f yaml/kubevirt/operator.yaml
 kubectl apply -f yaml/kubevirt/cr.yaml
 echo "KubeVirt deployed"
 
+
 # deploy a vm
 echo "Deploying a VM (w/ rook storage)..."
-kubectl apply -f yaml/kubevirt/vm.yaml
+until kubectl apply -f yaml/kubevirt/vm.yaml; do
+  echo "Waiting for VM to be deployed..."
+  sleep 1
+done
 
 # wait for the vm to be ready
 while [[ $(kubectl get vm debian -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
